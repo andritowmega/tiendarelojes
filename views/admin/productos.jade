@@ -1,0 +1,46 @@
+extends layout
+
+block content
+    .row.justify-content-center
+        .col-md-8
+            h1 Agregar Nuevo Producto 
+                 form(method="post" action="/admin/insertarProducto")
+                    .mb-3
+                        input.form-control(type='text' placeholder="Material" name="material")
+                    .mb-3
+                        input.form-control(type='text' placeholder="Color" name="color")
+                    .mb-3
+                        input.form-control(type='number' placeholder="Precio Ejemplo: 10" name="precio")
+                    .mb-3
+                        input.form-control(type='text' placeholder="Marca" name="marca")
+                    .mb-3
+                        input.form-control(type='text' placeholder="Descripción" name="descripcion")
+                    .mb-3
+                        input.form-control(type='text' placeholder="Stock" name="cantidad")
+                    button.btn.btn-primary(type='submit') Agregar Producto
+            hr
+            h1 Lista de Productos
+            
+            table.table.table-hover
+                thead
+                    tr
+                    th(scope='col') Id
+                    th(scope='col') Material
+                    th(scope='col') Color
+                    th(scope='col') Precio
+                    th(scope='col') Marca 
+                    th(scope='col') Descripción
+                    th(scope='col') Stock
+                    th(scope='col') Editar
+                each item in productos
+                    tbody
+                        tr
+                        th #{item.product_id}
+                        td #{item.material}
+                        td #{item.color}
+                        td S/ #{item.precio}
+                        td #{item.marca}
+                        td #{item.descripcion}
+                        th #{item.cantidad}
+                        td 
+                            img(src="/images/editar.png" width="25px")

@@ -22,15 +22,36 @@ class UsuarioController {
     return null;
   }
   async obtenerPedidos(){
-      const PedidosModel = require("../models/pedidos");
-      const pedidosModel = new PedidosModel();
-      const data = pedidosModel.obtener();
+      const ProductosModel = require("../models/productos");
+      const productosModel = new ProductosModel();
+      const data = productosModel.obtenerPedidos();
       const response = await data.catch(err=>{
         console.log("err obtener pedidos controller", err);
         return null;
       });
       if(response && response[0].length>0)
       return response[0];
+  }
+  async obtenerProductos(){
+    const ProductosModel = require("../models/productos");
+    const productosModel = new ProductosModel();
+    const data = productosModel.obtenerProductos();
+    const response = await data.catch(err=>{
+      console.log("err obtener productos controller", err);
+      return null;
+    });
+    if(response && response[0].length>0)
+    return response[0];
+  }
+  async insertarProducto(dataForm){
+    const ProductosModel = require("../models/productos");
+    const productosModel = new ProductosModel();
+    const data = productosModel.insertarProducto(dataForm.material,dataForm.color,dataForm.precio,"img.jpg",dataForm.marca,dataForm.descripcion,dataForm.cantidad);
+    const response = await data.catch(err=>{
+      console.log("err obtener productos controller", err);
+      return false;
+    });
+    return response;
   }
 }
 module.exports = UsuarioController;
