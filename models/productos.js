@@ -30,13 +30,23 @@ class ProductosModel{
         con.end();
         return true;
     }
-    async insertarPedido(telefono,direccion,idPersona,idProducto){
+    async editarProducto(material,color,precio,marca,descripcion,idProducto){
         const con = connectionDb().promise();
-        const sql = "CALL hacerPedido(?,?,?,?)";
-        const values = [telefono,direccion,idPersona,idProducto];
+        console.log("editar",idProducto);
+        const sql = "CALL update_reloj(?,?,?,?,?,?)";
+        const values = [idProducto,material,color,precio,marca,descripcion];
         const data = await con.query(sql,values);
         con.end();
         return true;
+    }
+    async obtenerProducto(idProducto){
+        const con = connectionDb().promise();
+        const sql = "CALL obtenerReloj(?)";
+        const values = [idProducto];
+        const data = await con.query(sql,values);
+        con.end();
+        if(data && data[0][0]) return data[0][0];
+        else return null;
     }
 }
 module.exports = ProductosModel;

@@ -43,4 +43,5 @@ block content
                         td #{item.descripcion}
                         th #{item.cantidad}
                         td 
-                            img(src="/images/editar.png" width="25px")
+                            a(href="/admin/editar/#{item.product_id}")
+                                img(src="/images/editar.png" width="25px")

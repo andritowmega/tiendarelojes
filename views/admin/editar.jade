@@ -4,15 +4,15 @@ block content
     .row.justify-content-center
         .col-md-8
             h1 Editando Producto
-                 form(method="post" action="/admin/insertarProducto")
+                 form(method="post" action="/admin/editarProducto/#{producto.product_id}")
                     .mb-3
-                        input.form-control(type='text' placeholder="Material" name="material")
+                        input.form-control(type='text' placeholder="Material" value="#{producto.material}" name="material")
                     .mb-3
-                        input.form-control(type='text' placeholder="Color" name="color")
+                        input.form-control(type='text' placeholder="Color" value="#{producto.color}" name="color")
                     .mb-3
-                        input.form-control(type='number' placeholder="Precio Ejemplo: 10" name="precio")
+                        input.form-control(type='number' placeholder="Precio Ejemplo: 10" value="#{producto.precio}" name="precio")
                     .mb-3
-                        input.form-control(type='text' placeholder="Marca" name="marca")
+                        input.form-control(type='text' placeholder="Marca" value="#{producto.marca}" name="marca")
                     .mb-3
-                        input.form-control(type='text' placeholder="Descripción" name="descripcion")
+                        input.form-control(type='text' placeholder="Descripción" value="#{producto.descripcion}" name="descripcion")
                     button.btn.btn-primary(type='submit') Editar Producto

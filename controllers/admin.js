@@ -46,12 +46,32 @@ class UsuarioController {
   async insertarProducto(dataForm){
     const ProductosModel = require("../models/productos");
     const productosModel = new ProductosModel();
-    const data = productosModel.insertarProducto(dataForm.material,dataForm.color,dataForm.precio,"img.jpg",dataForm.marca,dataForm.descripcion,dataForm.cantidad);
+    const data = productosModel.insertarProducto(dataForm.material,dataForm.color,dataForm.precio,"r2.png",dataForm.marca,dataForm.descripcion,dataForm.cantidad);
     const response = await data.catch(err=>{
       console.log("err obtener productos controller", err);
       return false;
     });
     return response;
+  }
+  async obtenerProducto(idProducto) {
+    const ProductosModel = require("../models/productos");
+    const productosModel = new ProductosModel();
+    const data = productosModel.obtenerProducto(idProducto);
+    const response = await data.catch((err) => {
+      console.log("err obtener pedido controller", err);
+      return null;
+    });
+    return response[0];
+  }
+  async editarProducto(dataForm,idProducto) {
+    const ProductosModel = require("../models/productos");
+    const productosModel = new ProductosModel();
+    const data = productosModel.editarProducto(dataForm.material,dataForm.color,dataForm.precio,dataForm.marca,dataForm.descripcion,idProducto);
+    const response = await data.catch((err) => {
+      console.log("err editar producto controller", err);
+      return false;
+    });
+    return true;
   }
 }
 module.exports = UsuarioController;

@@ -80,5 +80,6 @@ class UsuarioController {
     });
     return true;
   }
+  
 }
 module.exports = UsuarioController;

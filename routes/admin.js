@@ -21,13 +21,17 @@ router.get("/productos", ensureToken, async function (req, res, next) {
   res.render("admin/productos", { productos: response });
 });
 router.get("/editar/:idProducto", ensureToken, async function (req, res, next) {
-  let data = adminController.obtenerProductos();
+  console.log("id",req.params.idProducto);
+  let data = adminController.obtenerProducto(req.params.idProducto);
   let response = await data.catch((err) => {
     console.log("Router Admin err obtener productos", err);
     return null;
   });
-  res.render("admin/productos", { productos: response });
+  console.log("producto",response);
+  if(response)  res.render("admin/editar", { producto: response });
+  else res.redirect("/admin/productos");
 });
+
 router.get("/login", function (req, res, next) {
   res.render("admin/login");
 });
@@ -55,6 +59,15 @@ router.post("/insertarProducto", async function (req, res, next) {
     return false;
   });
   if (response) res.redirect("/admin/productos");
+  else res.redirect("/admin/productos?msg=err");
+});
+router.post("/editarProducto/:idProducto", ensureToken, async function (req, res, next) {
+  let data = adminController.editarProducto(req.body,req.params.idProducto)
+  let response = await data.catch((err) => {
+    console.log("Router Admin err editar productos", err);
+    return false;
+  });
+  if(response)  res.redirect("/admin/productos?msg=ok");
   else res.redirect("/admin/productos?msg=err");
 });
 module.exports = router;
