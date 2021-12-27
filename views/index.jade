@@ -7,66 +7,49 @@ block content
     h1 LOS RELOJES CRUZZALEGUI SON CREADOS CON ESCRUPULOSA MINUCIOSIDAD
     p Explore la colección de prestigiosos relojes Rolex de alta precisión. Rolex proporciona una amplia selección de relojes Oyster Perpetual y Cellini, para adaptarse a cualquier muñeca. Descubra la gran selección de relojes Rolex: una perfecta combinación de estilo y funcionalidad.
   .row
-    .col-md-4.productos 
-      .row
-        img.img-producto(src="/images/product/r1.png" width="100%")
-      .row 
-        h4 producto 
-      .row 
-        p 
-          ul 
-            li Precio: 50.00
-            li Material
-    .col-md-4.productos 
-      .row
-        img.img-producto(src="/images/product/r2.png" width="100%")
-      .row 
-        h4 producto 
-      .row 
-        p 
-          ul 
-            li Precio: 50.00
-            li Material
-    .col-md-4.productos 
-      .row
-        img.img-producto(src="/images/product/r1.png" width="100%")
-      .row 
-        h4 producto 
-      .row 
-        p 
-          ul 
-            li Precio: 50.00
-            li Material
-  .row
-    .col-md-4.productos 
-      .row
-        img.img-producto(src="/images/product/r1.png" width="100%")
-      .row 
-        h4 producto 
-      .row 
-        p 
-          ul 
-            li Precio: 50.00
-            li Material
-    .col-md-4.productos 
-      .row
-        img.img-producto(src="/images/product/r2.png" width="100%")
-      .row 
-        h4 producto 
-      .row 
-        p 
-          ul 
-            li Precio: 50.00
-            li Material
-    .col-md-4.productos 
-      .row
-        img.img-producto(src="/images/product/r1.png" width="100%")
-      .row 
-        h4 producto 
-      .row 
-        p 
-          ul 
-            li Precio: 50.00
-            li Material
+    each item in pedidos
+      .col-md-4.productos 
+        .row
+          img.img-producto(src="/images/product/r1.png" width="100%")
+        .row 
+          p 
+            ul 
+              li Precio: S/ #{item.precio}
+              li Material: #{item.material}
+              li Color: #{item.color}
+              li Marca: #{item.marca}
+              li Descripcion: #{item.descripcion}
+              li Stock: #{item.cantidad}
+            p 
+              // Button trigger modal
+              button.btn.btn-primary(type='button' data-bs-toggle='modal' data-bs-target='#exampleModal#{item.product_id}')
+                | Pedir
+              // Modal
+              .modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true' id='exampleModal#{item.product_id}')
+                .modal-dialog
+                  .modal-content
+                    if token
+                      form(method="post" action="/confirmarPedido/#{item.product_id}/#{token.id}")
+                        .modal-header
+                          h5#exampleModalLabel.modal-title Pedido para #{token.nombres}
+                          button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                        .modal-body
+                            .mb-3
+                                input.form-control(type='text' placeholder="Telefono para Entrega" name="telefono")
+                            .mb-3
+                                input.form-control(type='text' placeholder="Dirección de Entrega" name="direccion")
+                        .modal-footer
+                          button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Cancelar
+                          button.btn.btn-primary(type='submit') Confirmar Pedido
+                    else 
+                      .modal-header
+                          h5#exampleModalLabel.modal-title No puedes realizar un pedido
+                          button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                        .modal-body
+                          h4 Necesitas registrarte para hacer pedidos
+                          a.btn.btn-primary(href='/registro') Registrarme
+                        .modal-footer
+                          button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Cerrar
+
   .row.footer
     h4 Cruzzalegui 2021

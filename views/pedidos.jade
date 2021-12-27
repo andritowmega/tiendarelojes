@@ -1,15 +1,30 @@
 extends layout
 
 block content
-  .row.justify-content-center
-    .col-md-4
-        h1 Lista de pedidos
-        ul
-            li Pedido 1
-            li Pedido 1
-            li Pedido 1
-            li Pedido 1
-            li Pedido 1
-            li Pedido 1
-            li Pedido 1
-            li Pedido 1
+    .row.justify-content-center
+        .col-md-8
+            h1 Mis Pedidos
+
+            table.table.table-hover
+                thead
+                    tr
+                    th(scope='col') Telefono
+                    th(scope='col') Dirección
+                    th(scope='col') Material
+                    th(scope='col') Color
+                    th(scope='col') Precio
+                    th(scope='col') Marca 
+                    th(scope='col') Descripción
+                if pedidos
+                    each item in pedidos
+                        tbody
+                            tr
+                            td #{item.telefono}
+                            td #{item.direccion}
+                            td #{item.material}
+                            td #{item.color}
+                            td S/ #{item.precio}
+                            td #{item.marca}
+                            td #{item.descripcion}
+                else 
+                    p No has realizado Pedidos

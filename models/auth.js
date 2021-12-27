@@ -16,5 +16,13 @@ class AuthModel{
         con.end();
         return data[0];
     }
+    async registrarUsuario(nombre,papellido,sapellido,correo,password){
+        const con = connectionDb().promise();
+        const sql = "CALL registrarUsuario(?,?,?,?,?)";
+        const values = [nombre,papellido,sapellido,correo,password];
+        const data = await con.query(sql,values);
+        con.end();
+        return data[0];
+    }
 }
 module.exports = AuthModel;

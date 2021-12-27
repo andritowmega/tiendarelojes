@@ -4,11 +4,15 @@ block content
   .row.justify-content-center
     .col-md-4
         h1 Registro
-        form
+        form(method="post" action="/registro")
             .mb-3
-                label.form-label(for='exampleInputEmail1') Email
-                input#exampleInputEmail1.form-control(type='email' aria-describedby='emailHelp')
+                input.form-control(type='text' placeholder="Nombres" name="nombre")
             .mb-3
-                label.form-label(for='exampleInputPassword1') Password
-                input#exampleInputPassword1.form-control(type='password')
-            button.btn.btn-primary(type='submit') Ingresar
+                input.form-control(type='text' placeholder="Apellido Paterno" name="ap1")
+            .mb-3
+                input.form-control(type='text' placeholder="Apellido Materno" name="ap2")
+            .mb-3
+                input.form-control(type='email' placeholder="correo" name="correo")
+            .mb-3
+                input.form-control(type='password' placeholder="Contraseña: **********" name="password")
+            button.btn.btn-primary(type='submit') Registrarme
