@@ -73,7 +73,7 @@ class UsuarioController {
   async hacerPedido(dataForm,idPersona,idProducto) {
     const ProductosModel = require("../models/productos");
     const productosModel = new ProductosModel();
-    const data = productosModel.insertarPedido(dataForm.telefono,dataForm.direccion,idPersona,idProducto)
+    const data = productosModel.insertarPedido(dataForm.telefono,dataForm.direccion,idProducto,idPersona)
     const response = await data.catch((err) => {
       console.log("err obtener pedidos controller", err);
       return false;

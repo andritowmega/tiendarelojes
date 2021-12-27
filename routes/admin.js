@@ -20,6 +20,14 @@ router.get("/productos", ensureToken, async function (req, res, next) {
   });
   res.render("admin/productos", { productos: response });
 });
+router.get("/editar/:idProducto", ensureToken, async function (req, res, next) {
+  let data = adminController.obtenerProductos();
+  let response = await data.catch((err) => {
+    console.log("Router Admin err obtener productos", err);
+    return null;
+  });
+  res.render("admin/productos", { productos: response });
+});
 router.get("/login", function (req, res, next) {
   res.render("admin/login");
 });

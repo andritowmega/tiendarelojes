@@ -37,6 +37,7 @@ router.get("/registro", function (req, res, next) {
 router.get("/pedidos", ensureTokenUser, async function (req, res, next) {
   const UsuarioController = require("../controllers/usuario");
   let usuarioController = new UsuarioController();
+  console.log("idPersona",req.body.data.id);
   let data = usuarioController.obtenerPedidos(req.body.data.id);
   let response = await data.catch((err) => {
     console.log("Router User Login error", err);
